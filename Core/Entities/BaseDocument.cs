@@ -8,6 +8,7 @@ namespace Core.Entities
 {
     public abstract class BaseDocument : IDocument
     {
+        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public ObjectId Id { get; set; }
     }

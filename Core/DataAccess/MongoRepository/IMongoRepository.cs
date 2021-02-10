@@ -27,6 +27,8 @@ namespace Core.DataAccess.MongoRepository
         Task InsertManyAsync(ICollection<TDocument> documents);
         void ReplaceOne(TDocument document);
         Task ReplaceOneAsync(TDocument document);
+        void UpdateSubOne(string id, object subDocument);
+        Task UpdateSubOneAsync(string id, object subDocument);
         void DeleteOne(Expression<Func<TDocument, bool>> filterExpression);
         Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression);
         void DeleteById(string id);

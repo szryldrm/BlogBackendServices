@@ -2,8 +2,10 @@
 using Core.Settings.MongoSettings;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Pluralize.NET.Core;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -106,6 +108,25 @@ namespace Core.DataAccess.MongoRepository
         {
             var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
             await _collection.FindOneAndReplaceAsync(filter, document);
+        }
+
+        public void UpdateSubOne(string id, object subDocument)
+        {
+            var objectId = new ObjectId(id);
+            var filterDefinition = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+            var updateDefinition = Builders<TDocument>.Update.Push(new Pluralizer().Pluralize(subDocument.GetType().Name), subDocument);
+            _collection.UpdateOneAsync(filterDefinition, updateDefinition);
+        }
+
+        public Task UpdateSubOneAsync(string id, BaseDocument subDocument)
+        {
+            return Task.Run(() =>
+            {
+                var objectId = new ObjectId(id);
+                var filterDefinition = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
+                var updateDefinition = Builders<TDocument>.Update.Set(new Pluralizer().Pluralize(subDocument.GetType().Name), subDocument.ToBsonDocument());
+                return _collection.UpdateOneAsync(filterDefinition, updateDefinition);
+            });
         }
 
         public void DeleteOne(Expression<Func<TDocument, bool>> filterExpression)

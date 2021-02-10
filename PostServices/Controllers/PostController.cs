@@ -1,6 +1,4 @@
-﻿using PostServices.Model.Concrete;
-using PostServices.Model.Dtos;
-using PostServices.Service.Abstract;
+﻿using PostServices.Service.Abstract;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PostServices.Model.Dtos.Methods.GET;
+using PostServices.Model.Concrete;
+using PostServices.Model.Dtos.Methods.POST;
 
 namespace PostServices.Controllers
 {
@@ -31,7 +32,7 @@ namespace PostServices.Controllers
             var result = _postService.GetAll();
             if (result.Success)
             {
-                var mappingData = _mapper.Map<IEnumerable<Post>, IEnumerable<PostDTO>>(result.Data);
+                var mappingData = _mapper.Map<IEnumerable<Post>, IEnumerable<GETPostDTO>>(result.Data);
                 return Ok(mappingData);
             }
             return BadRequest(result.Message);
@@ -43,16 +44,16 @@ namespace PostServices.Controllers
             var result = _postService.FindByIdAsync(id);
             if (result.Result.Success)
             {
-                var mappingData = _mapper.Map<Post, PostDTO>(result.Result.Data);
+                var mappingData = _mapper.Map<Post, GETPostDTO>(result.Result.Data);
                 return Ok(mappingData);
             }
             return BadRequest(result.Result.Message);
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] AddPostDTO addPostDTO)
+        public IActionResult Add([FromBody] POSTPostDTO POSTPostDTO)
         {
-            var mappingData = _mapper.Map<AddPostDTO, Post>(addPostDTO);
+            var mappingData = _mapper.Map<POSTPostDTO, Post>(POSTPostDTO);
 
             var result = _postService.InsertOneAsync(mappingData);
             if (result.Result.Success)

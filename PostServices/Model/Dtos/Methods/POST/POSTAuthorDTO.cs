@@ -1,18 +1,12 @@
-﻿using Core.Entities;
-using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PostServices.Model.Concrete
+namespace PostServices.Model.Dtos.Methods.POST
 {
-    public class Author : BaseDocument
+    public class POSTAuthorDTO
     {
-        public Author()
-        {
-            Id = ObjectId.GenerateNewId();
-        }
         public string AuthorName { get; set; }
         public string AuthorSurname { get; set; }
         public string AuthorEmail { get; set; }
