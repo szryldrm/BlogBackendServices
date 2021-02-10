@@ -2,8 +2,8 @@
 {
     public static class AspectMessages
     {
-        public static string WrongValidationType = "Wrong Validation Type";
+        public static string WRON_VALIDATION_TYPE = "WRONG VALIDATION TYPE";
 
-        public static string WrongLoggerType = "Wrong Logger Type";
+        public static string WRONG_LOGGER_TYPE = "WRONG LOGGER TYPE";
     }
 }

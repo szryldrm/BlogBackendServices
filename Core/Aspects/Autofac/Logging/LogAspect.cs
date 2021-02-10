@@ -16,7 +16,7 @@ namespace Core.Aspects.Autofac.Logging
         {
             if (LoggerService.BaseType != typeof(LoggerServiceBase))
             {
-                throw new System.Exception(AspectMessages.WrongLoggerType);
+                throw new System.Exception(AspectMessages.WRONG_LOGGER_TYPE);
             }
             _loggerServiceBase = (LoggerServiceBase)Activator.CreateInstance(LoggerService);
         }
