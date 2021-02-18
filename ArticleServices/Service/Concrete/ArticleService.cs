@@ -49,6 +49,7 @@ namespace ArticleServices.Service.Concrete
         {
             try
             {
+                article.AddedDate = DateTime.Now;
                 var filter = Builders<Post>.Filter.Eq(x => x.Id, ObjectId.Parse(id));
                 var update = Builders<Post>.Update.Combine(
                         Builders<Post>.Update.Push(x => x.Articles, article),
