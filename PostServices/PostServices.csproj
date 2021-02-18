@@ -17,4 +17,9 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\Dtos\Methods\DELETE\" />
+    <Folder Include="Model\Dtos\Methods\PUT\" />
+  </ItemGroup>
+
 </Project>

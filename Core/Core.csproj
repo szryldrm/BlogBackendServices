@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.6" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Pluralize.NET.Core" Version="1.0.0" />
     <PackageReference Include="ServiceStack.Redis" Version="5.10.4" />
   </ItemGroup>
 

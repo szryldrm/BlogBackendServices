@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PostServices.Model.Concrete
+namespace ArticleServices.Model.Concrete
 {
     public class Author : BaseDocument
     {

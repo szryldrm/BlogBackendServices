@@ -2,8 +2,10 @@
 using Core.Settings.MongoSettings;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Pluralize.NET.Core;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -48,14 +50,14 @@ namespace Core.DataAccess.MongoRepository
             return _collection.Find(filterExpression).Project(projectionExpression).ToEnumerable();
         }
 
-        public virtual TDocument FindOne(Expression<Func<TDocument, bool>> filterExpression)
+        public virtual TDocument FindOne(FilterDefinition<TDocument> filterDefinition)
         {
-            return _collection.Find(filterExpression).FirstOrDefault();
+            return _collection.Find(filterDefinition).FirstOrDefault();
         }
 
-        public virtual Task<TDocument> FindOneAsync(Expression<Func<TDocument, bool>> filterExpression)
+        public virtual Task<TDocument> FindOneAsync(FilterDefinition<TDocument> filterDefinition)
         {
-            return Task.Run(() => _collection.Find(filterExpression).FirstOrDefaultAsync());
+            return Task.Run(() => _collection.Find(filterDefinition).FirstOrDefaultAsync());
         }
 
         public virtual TDocument FindById(string id)
@@ -85,6 +87,19 @@ namespace Core.DataAccess.MongoRepository
             return Task.Run(() => _collection.InsertOneAsync(document));
         }
 
+        public void InsertSubOne(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update)
+        {
+            _collection.UpdateOne(filter, update);
+        }
+
+        public Task InsertSubOneAsync(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update)
+        {
+            return Task.Run(() =>
+            {
+                return _collection.UpdateOneAsync(filter, update);
+            });
+        }
+
         public void InsertMany(ICollection<TDocument> documents)
         {
             _collection.InsertMany(documents);
@@ -106,6 +121,32 @@ namespace Core.DataAccess.MongoRepository
         {
             var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
             await _collection.FindOneAndReplaceAsync(filter, document);
+        }
+
+        public void UpdateSubOne(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update)
+        {
+            _collection.UpdateOne(filter, update);
+        }
+
+        public Task UpdateSubOneAsync(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update)
+        {
+            return Task.Run(() =>
+            {
+                return _collection.UpdateOneAsync(filter, update);
+            });
+        }
+
+        public void DeleteSubOne(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update)
+        {
+            _collection.UpdateOne(filter, update);
+        }
+
+        public Task DeleteSubOneAsync(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update)
+        {
+            return Task.Run(() =>
+            {
+                return _collection.UpdateOneAsync(filter, update);
+            });
         }
 
         public void DeleteOne(Expression<Func<TDocument, bool>> filterExpression)
