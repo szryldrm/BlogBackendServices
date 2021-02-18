@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostServices.Model.Dtos.Methods.POST
 {
-    public class POSTArticleDTO
+    public class POST_ArticleDTO
     {
         public string Title { get; set; }
         public string Content { get; set; }

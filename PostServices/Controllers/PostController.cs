@@ -32,7 +32,7 @@ namespace PostServices.Controllers
             var result = _postService.GetAll();
             if (result.Success)
             {
-                var mappingData = _mapper.Map<IEnumerable<Post>, IEnumerable<GETPostDTO>>(result.Data);
+                var mappingData = _mapper.Map<IEnumerable<Post>, IEnumerable<GET_PostDTO>>(result.Data);
                 return Ok(mappingData);
             }
             return BadRequest(result.Message);
@@ -44,16 +44,16 @@ namespace PostServices.Controllers
             var result = _postService.FindByIdAsync(id);
             if (result.Result.Success)
             {
-                var mappingData = _mapper.Map<Post, GETPostDTO>(result.Result.Data);
+                var mappingData = _mapper.Map<Post, GET_PostDTO>(result.Result.Data);
                 return Ok(mappingData);
             }
             return BadRequest(result.Result.Message);
         }
 
         [HttpPost]
-        public IActionResult Add([FromBody] POSTPostDTO POSTPostDTO)
+        public IActionResult Add([FromBody] POST_PostDTO POSTPostDTO)
         {
-            var mappingData = _mapper.Map<POSTPostDTO, Post>(POSTPostDTO);
+            var mappingData = _mapper.Map<POST_PostDTO, Post>(POSTPostDTO);
 
             var result = _postService.InsertOneAsync(mappingData);
             if (result.Result.Success)

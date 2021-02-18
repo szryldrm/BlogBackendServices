@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MongoDB.Driver;
 
 namespace PostServices.Service.Concrete
 {
@@ -53,7 +54,7 @@ namespace PostServices.Service.Concrete
 
         public IDataResult<Post> FindOne(Post post)
         {
-            var value = _postRepository.FindOne(a => a.Id == post.Id);
+            var value = _postRepository.FindOne(Builders<Post>.Filter.Eq(x => x.Id, post.Id));
 
             return value != null
                 ? (IDataResult<Post>)new SuccessDataResult<Post>(value)
@@ -62,7 +63,7 @@ namespace PostServices.Service.Concrete
 
         public async Task<IDataResult<Post>> FindOneAsnyc(Post post)
         {
-            var value = await _postRepository.FindOneAsync(a => a.Id == post.Id);
+            var value = await _postRepository.FindOneAsync(Builders<Post>.Filter.Eq(x => x.Id, post.Id));
 
             return value != null
                 ? (IDataResult<Post>)new SuccessDataResult<Post>(value)

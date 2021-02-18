@@ -16,20 +16,20 @@ namespace PostServices.Extensions.Mapping
         public MappingProfile()
         {
             //Before Mapping Configuration - Need to CreateMap for Nested Object Also
-            CreateMap<Author, GETAuthorDTO>();
-            CreateMap<POSTAuthorDTO, Author>();
+            CreateMap<Author, GET_AuthorDTO>();
+            CreateMap<POST_AuthorDTO, Author>();
 
-            CreateMap<Article, GETArticleDTO>();
-            CreateMap<POSTArticleDTO, Article>();
+            CreateMap<Article, GET_ArticleDTO>();
+            CreateMap<POST_ArticleDTO, Article>();
 
             CreateMap<ObjectId, string>().ConvertUsing(o => o.ToString());
             CreateMap<string, ObjectId>().ConvertUsing(s => ObjectId.Parse(s));
 
             //Dest = DTO Object, src = Main Object
-            CreateMap<Post, GETPostDTO>()
+            CreateMap<Post, GET_PostDTO>()
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author))
                 .ForMember(dest => dest.Articles, opt => opt.MapFrom(src => src.Articles));
-            CreateMap<POSTPostDTO, Post>()
+            CreateMap<POST_PostDTO, Post>()
                 .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author))
                 .ForMember(dest => dest.Articles, opt => opt.MapFrom(src => src.Articles));
         }

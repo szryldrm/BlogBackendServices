@@ -1,12 +1,12 @@
-﻿using ArticleServices.Model.Concrete;
+﻿using PostServices.Model.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ArticleServices.Model.Dto.Methods.POST
+namespace PostServices.Model.Dtos.Methods.GET
 {
-    public class POSTArticleDTO
+    public class GET_ArticleDTO
     {
         public string Id { get; set; }
         public string Title { get; set; }

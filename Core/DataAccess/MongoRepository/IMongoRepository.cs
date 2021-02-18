@@ -17,18 +17,22 @@ namespace Core.DataAccess.MongoRepository
         IEnumerable<TProjected> FilterBy<TProjected>(
             Expression<Func<TDocument, bool>> filterExpression,
             Expression<Func<TDocument, TProjected>> projectionExpression);
-        TDocument FindOne(Expression<Func<TDocument, bool>> filterExpression);
-        Task<TDocument> FindOneAsync(Expression<Func<TDocument, bool>> filterExpression);
+        TDocument FindOne(FilterDefinition<TDocument> filterDefinition);
+        Task<TDocument> FindOneAsync(FilterDefinition<TDocument> filterDefinition);
         TDocument FindById(string id);
         Task<TDocument> FindByIdAsync(string id);
         void InsertOne(TDocument document);
         Task InsertOneAsync(TDocument document);
         void InsertMany(ICollection<TDocument> documents);
         Task InsertManyAsync(ICollection<TDocument> documents);
+        void InsertSubOne(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update);
+        Task InsertSubOneAsync(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update);
         void ReplaceOne(TDocument document);
         Task ReplaceOneAsync(TDocument document);
-        void UpdateSubOne(string id, object subDocument);
-        Task UpdateSubOneAsync(string id, object subDocument);
+        void UpdateSubOne(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update);
+        Task UpdateSubOneAsync(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update);
+        void DeleteSubOne(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update);
+        Task DeleteSubOneAsync(FilterDefinition<TDocument> filter, UpdateDefinition<TDocument> update);
         void DeleteOne(Expression<Func<TDocument, bool>> filterExpression);
         Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression);
         void DeleteById(string id);

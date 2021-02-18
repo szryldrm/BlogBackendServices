@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace PostServices.Model.Dtos.Methods.POST
 {
-    public class POSTPostDTO
+    public class POST_PostDTO
     {
-        public List<POSTArticleDTO> Articles { get; set; }
+        public List<POST_ArticleDTO> Articles { get; set; }
         public int Status { get; set; }
         public string ImageURL { get; set; }
-        public POSTAuthorDTO Author { get; set; }
+        public POST_AuthorDTO Author { get; set; }
         public DateTime AddedDate { get; set; }
         public DateTime ModifiedDate { get; set; }
     }

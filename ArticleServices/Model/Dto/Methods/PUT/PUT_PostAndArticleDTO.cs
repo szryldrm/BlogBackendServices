@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ArticleServices.Model.Dto.Methods.POST
+namespace ArticleServices.Model.Dto.Methods.PUT
 {
-    public class POSTPostAndArticleDTO
+    public class PUT_PostAndArticleDTO
     {
         public string Id { get; set; }
-        public POSTArticleDTO Article { get; set; }
+        public PUT_ArticleDTO Article { get; set; }
     }
 }

@@ -1,12 +1,12 @@
-﻿using PostServices.Model.Concrete;
+﻿using ArticleServices.Model.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PostServices.Model.Dtos.Methods.GET
+namespace ArticleServices.Model.Dto.Methods.DELETE
 {
-    public class GETArticleDTO
+    public class DELETE_ArticleDTO
     {
         public string Id { get; set; }
         public string Title { get; set; }

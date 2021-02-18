@@ -9,9 +9,9 @@ namespace ArticleServices.Service.Abstract
 {
     public interface IArticleService
     {
-        Task<IDataResult<Post>> FindByIdAsync(string id);
-        Task<IDataResult<Post>> InsertOneAsync(Post post);
+        Task<IDataResult<Article>> GetOneAsync(string id);
+        Task<IDataResult<Post>> InsertOneAsync(string id, Article article);
         Task<IDataResult<Post>> UpdateOneAsync(string id, Article article);
-        Task<IResult> DeleteByIdAsync(string id);
+        Task<IDataResult<Post>> DeleteOneAsync(string id, Article article);
     }
 }
