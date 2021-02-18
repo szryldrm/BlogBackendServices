@@ -24,6 +24,8 @@ namespace ArticleServices.Service.Concrete
             _articleRepository = articleRepository;
         }
 
+        [LogAspect(typeof(DatabaseLogger), Priority = 1)]
+        [TransactionScopeAspect(Priority = 2)]
         public async Task<IDataResult<Article>> GetOneAsync(string id)
         {
             var value = await _articleRepository.FindOneAsync(Builders<Post>.Filter.ElemMatch(x => x.Articles, x => x.Id == ObjectId.Parse(id)));
@@ -61,6 +63,8 @@ namespace ArticleServices.Service.Concrete
             }
         }
 
+        [LogAspect(typeof(DatabaseLogger), Priority = 1)]
+        [TransactionScopeAspect(Priority = 2)]
         public async Task<IDataResult<Post>> UpdateOneAsync(string id, Article article)
         {
             try
@@ -84,6 +88,9 @@ namespace ArticleServices.Service.Concrete
                 return new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_UPDATED + " Ex: " + ex.Message);
             }
         }
+
+        [LogAspect(typeof(DatabaseLogger), Priority = 1)]
+        [TransactionScopeAspect(Priority = 2)]
         public async Task<IDataResult<Post>> DeleteOneAsync(string id, Article article)
         {
             try
