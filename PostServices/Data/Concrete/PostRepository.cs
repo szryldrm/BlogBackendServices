@@ -1,7 +1,7 @@
 ﻿using PostServices.Data.Abstract;
 using PostServices.Model.Concrete;
-using Core.DataAccess.MongoRepository;
-using Core.Settings.MongoSettings;
+using SYCore.DataAccess.MongoRepository;
+using SYCore.Settings.MongoSettings;
 using System;
 using System.Collections.Generic;
 using System.Linq;

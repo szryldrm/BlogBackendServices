@@ -1,5 +1,5 @@
 ﻿using PostServices.Model.Concrete;
-using Core.Utilities.Results;
+using SYCore.Utilities.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;

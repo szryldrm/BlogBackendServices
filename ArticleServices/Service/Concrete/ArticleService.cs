@@ -2,10 +2,10 @@
 using ArticleServices.Extensions.Messages;
 using ArticleServices.Model.Concrete;
 using ArticleServices.Service.Abstract;
-using Core.Aspects.Autofac.Logging;
-using Core.Aspects.Autofac.Transaction;
-using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
-using Core.Utilities.Results;
+using SYCore.Aspects.Autofac.Logging;
+using SYCore.Aspects.Autofac.Transaction;
+using SYCore.CrossCuttingConcerns.Logging.Log4Net.Loggers;
+using SYCore.Utilities.Results;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;

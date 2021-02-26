@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using SYCore.Entities;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;

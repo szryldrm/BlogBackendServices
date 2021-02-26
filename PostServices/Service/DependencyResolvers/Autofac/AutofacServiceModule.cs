@@ -5,7 +5,7 @@ using PostServices.Service.Concrete;
 using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Castle.DynamicProxy;
-using Core.Utilities.Interceptors;
+using SYCore.Utilities.Interceptors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
