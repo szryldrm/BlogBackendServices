@@ -13,13 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CategoryServices", "Categor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserServices", "UserServices\UserServices.csproj", "{C095A660-DA04-463D-81B3-5317993F84C5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{CB56C3A2-1378-4A32-AD9C-11805277241F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogServices", "LogServices\LogServices.csproj", "{E5B45A12-903B-42DC-81E4-994B7EB9583F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LikeServices", "LikeServices\LikeServices.csproj", "{D3BA8625-52BB-496F-8317-65F11B54D477}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArticleServices", "ArticleServices\ArticleServices.csproj", "{AEF7B09F-F6FE-4EF9-A673-2DAD5E57B942}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArticleServices", "ArticleServices\ArticleServices.csproj", "{AEF7B09F-F6FE-4EF9-A673-2DAD5E57B942}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{C095A660-DA04-463D-81B3-5317993F84C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C095A660-DA04-463D-81B3-5317993F84C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C095A660-DA04-463D-81B3-5317993F84C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CB56C3A2-1378-4A32-AD9C-11805277241F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CB56C3A2-1378-4A32-AD9C-11805277241F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CB56C3A2-1378-4A32-AD9C-11805277241F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CB56C3A2-1378-4A32-AD9C-11805277241F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5B45A12-903B-42DC-81E4-994B7EB9583F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5B45A12-903B-42DC-81E4-994B7EB9583F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5B45A12-903B-42DC-81E4-994B7EB9583F}.Release|Any CPU.ActiveCfg = Release|Any CPU

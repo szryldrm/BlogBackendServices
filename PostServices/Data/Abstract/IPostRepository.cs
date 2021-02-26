@@ -1,5 +1,5 @@
 ﻿using PostServices.Model.Concrete;
-using Core.DataAccess.MongoRepository;
+using SYCore.DataAccess.MongoRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;

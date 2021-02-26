@@ -1,7 +1,7 @@
-using Core.DependencyResolvers;
-using Core.Extensions;
-using Core.Settings.MongoSettings;
-using Core.Utilities.IoC;
+using SYCore.DependencyResolvers;
+using SYCore.Extensions;
+using SYCore.Settings.MongoSettings;
+using SYCore.Utilities.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
