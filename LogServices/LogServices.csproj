@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.7" />
-    <PackageReference Include="SYCore" Version="1.0.1" />
+    <PackageReference Include="SYCore" Version="1.0.10" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,7 +14,7 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="log4mongo-netcore" Version="3.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.0.7" />
-    <PackageReference Include="SYCore" Version="1.0.1" />
+    <PackageReference Include="SYCore" Version="1.0.10" />
   </ItemGroup>
 
   <ItemGroup>

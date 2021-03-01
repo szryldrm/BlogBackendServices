@@ -30,12 +30,12 @@ namespace PostServices.Controllers
         public IActionResult GetList()
         {
             var result = _postService.GetAll();
-            if (result.Success)
+            if (result.Result.Success)
             {
-                var mappingData = _mapper.Map<IEnumerable<Post>, IEnumerable<GET_PostDTO>>(result.Data);
+                var mappingData = _mapper.Map<IEnumerable<Post>, IEnumerable<GET_PostDTO>>(result.Result.Data);
                 return Ok(mappingData);
             }
-            return BadRequest(result.Message);
+            return BadRequest(result.Result.Message);
         }
 
         [HttpGet("{id}")]
