@@ -24,9 +24,20 @@ namespace ArticleServices.Controllers
         }
 
         [HttpPost]
-        public IActionResult InsertArticle([FromBody] POST_PostAndCategoryDTO POST_PostAndCategoryDTO)
+        public IActionResult InsertCategory([FromBody] POST_PostAndCategoryDTO POST_PostAndCategoryDTO)
         {
-            var result = _categoryService.InsertOneAsync(POST_PostAndCategoryDTO.Id, POST_PostAndCategoryDTO.Category);
+            var result = _categoryService.InsertAsync(POST_PostAndCategoryDTO.Id, POST_PostAndCategoryDTO.Categories);
+            if (result.Result.Success)
+            {
+                return Ok(result.Result.Message);
+            }
+            return BadRequest(result.Result.Message);
+        }
+
+        [HttpPost("one")]
+        public IActionResult InsertOneCategory([FromBody] POST_PostAndCategoryOneDTO POST_PostAndCategoryOneDTO)
+        {
+            var result = _categoryService.InsertOneAsync(POST_PostAndCategoryOneDTO.Id, POST_PostAndCategoryOneDTO.Category);
             if (result.Result.Success)
             {
                 return Ok(result.Result.Message);
@@ -35,7 +46,7 @@ namespace ArticleServices.Controllers
         }
 
         [HttpDelete]
-        public IActionResult DeleteArticle([FromBody] DELETE_PostAndCategoryDTO DELETE_PostAndCategoryDTO)
+        public IActionResult DeleteCategory([FromBody] DELETE_PostAndCategoryDTO DELETE_PostAndCategoryDTO)
         {
             var result = _categoryService.DeleteOneAsync(DELETE_PostAndCategoryDTO.Id, DELETE_PostAndCategoryDTO.Category);
             if (result.Result.Success)

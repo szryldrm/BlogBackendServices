@@ -26,6 +26,26 @@ namespace CategoryServices.Service.Concrete
 
         [LogAspect(typeof(DatabaseLogger), Priority = 1)]
         [TransactionScopeAspect(Priority = 2)]
+        public async Task<IDataResult<Post>> InsertAsync(string id, List<Category> categories)
+        {
+            try
+            {
+                var filter = Builders<Post>.Filter.Eq(x => x.Id, ObjectId.Parse(id));
+                var update = Builders<Post>.Update.Combine(
+                        Builders<Post>.Update.Set(x => x.Categories, categories),
+                        Builders<Post>.Update.Set(x => x.ModifiedDate, DateTime.Now)
+                    );
+                await _categoryRepository.InsertSubOneAsync(filter, update);
+                return new SuccessDataResult<Post>(GeneralMessages.RECORD_ADDED);
+            }
+            catch (Exception ex)
+            {
+                return new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_ADDED + " Ex: " + ex.Message);
+            }
+        }
+
+        [LogAspect(typeof(DatabaseLogger), Priority = 1)]
+        [TransactionScopeAspect(Priority = 2)]
         public async Task<IDataResult<Post>> InsertOneAsync(string id, Category category)
         {
             try
@@ -62,6 +82,6 @@ namespace CategoryServices.Service.Concrete
             {
                 return new ErrorDataResult<Post>(GeneralMessages.RECORDS_NOT_DELETED + " Ex: " + ex.Message);
             }
-        }
+        }        
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CategoryServices.Model.Dto.Methods.POST
 {
-    public class POST_PostAndCategoryDTO
+    public class POST_PostAndCategoryOneDTO
     {
         public string Id { get; set; }
-        public List<Category> Categories { get; set; }
+        public Category Category { get; set; }
     }
 }
