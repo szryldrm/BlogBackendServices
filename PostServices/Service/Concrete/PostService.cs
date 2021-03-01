@@ -11,36 +11,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Driver;
+using SYCore.Utilities.Messages;
 
 namespace PostServices.Service.Concrete
 {
     public class PostService : IPostService
     {
         private readonly IPostRepository _postRepository;
+        private readonly PostMessages _postMessages;
 
         public PostService(IPostRepository postRepository)
         {
             _postRepository = postRepository;
+            _postMessages = new PostMessages(LangCode.EN);
         }
 
         [LogAspect(typeof(DatabaseLogger), Priority = 1)]
         [TransactionScopeAspect(Priority = 2)]
-        public IDataResult<IQueryable<Post>> GetAll()
+        public async Task<IDataResult<List<Post>>> GetAll()
         {
-            var list = _postRepository.AsQueryable();
+            var list = await _postRepository.GetAll();
 
             return list != null
-                ? (IDataResult<IQueryable<Post>>)new SuccessDataResult<IQueryable<Post>>(list)
-                : new ErrorDataResult<IQueryable<Post>>(GeneralMessages.RECORDS_NOT_FOUND);
-        }
-
-        public IDataResult<Post> FindById(string id)
-        {
-            var value = _postRepository.FindById(id);
-
-            return value != null
-                ? (IDataResult<Post>)new SuccessDataResult<Post>(value)
-                : new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_FOUND);
+                ? (IDataResult<List<Post>>)new SuccessDataResult<List<Post>>(list)
+                : new ErrorDataResult<List<Post>>(_postMessages.POST_NOT_FOUND());
         }
 
         public async Task<IDataResult<Post>> FindByIdAsync(string id)
@@ -49,16 +43,7 @@ namespace PostServices.Service.Concrete
 
             return value != null
                 ? (IDataResult<Post>)new SuccessDataResult<Post>(value)
-                : new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_FOUND);
-        }
-
-        public IDataResult<Post> FindOne(Post post)
-        {
-            var value = _postRepository.FindOne(Builders<Post>.Filter.Eq(x => x.Id, post.Id));
-
-            return value != null
-                ? (IDataResult<Post>)new SuccessDataResult<Post>(value)
-                : new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_FOUND);
+                : new ErrorDataResult<Post>(_postMessages.POST_NOT_FOUND());
         }
 
         public async Task<IDataResult<Post>> FindOneAsnyc(Post post)
@@ -67,22 +52,7 @@ namespace PostServices.Service.Concrete
 
             return value != null
                 ? (IDataResult<Post>)new SuccessDataResult<Post>(value)
-                : new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_FOUND);
-        }
-
-        [LogAspect(typeof(DatabaseLogger), Priority = 1)]
-        [TransactionScopeAspect(Priority = 2)]
-        public IDataResult<Post> InsertOne(Post post)
-        {
-            try
-            {
-                _postRepository.InsertOne(post);
-                return new SuccessDataResult<Post>(GeneralMessages.RECORD_ADDED);
-            }
-            catch (Exception ex)
-            {
-                return new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_ADDED + " Ex: " + ex.Message);
-            }
+                : new ErrorDataResult<Post>(_postMessages.POST_NOT_FOUND());
         }
 
         [LogAspect(typeof(DatabaseLogger), Priority = 1)]
@@ -92,24 +62,11 @@ namespace PostServices.Service.Concrete
             try
             {
                 await _postRepository.InsertOneAsync(post);
-                return new SuccessDataResult<Post>(GeneralMessages.RECORD_ADDED);
+                return new SuccessDataResult<Post>(_postMessages.ADDED());
             }
             catch (Exception ex)
             {
-                return new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_ADDED + " Ex: " + ex.Message);
-            }
-        }
-
-        public IResult InsertMany(ICollection<Post> posts)
-        {
-            try
-            {
-                _postRepository.InsertMany(posts);
-                return new SuccessDataResult<Post>(GeneralMessages.RECORDS_ADDED);
-            }
-            catch (Exception ex)
-            {
-                return new ErrorDataResult<Post>(GeneralMessages.RECORDS_NOT_ADDED + " Ex: " + ex.Message);
+                return new ErrorDataResult<Post>(_postMessages.NOT_ADDED() + " - Ex = " + ex.Message);
             }
         }
 
@@ -118,24 +75,11 @@ namespace PostServices.Service.Concrete
             try
             {
                 await _postRepository.InsertManyAsync(posts);
-                return new SuccessDataResult<Post>(GeneralMessages.RECORDS_ADDED);
+                return new SuccessDataResult<Post>(_postMessages.ADDED());
             }
             catch (Exception ex)
             {
-                return new ErrorDataResult<Post>(GeneralMessages.RECORDS_NOT_ADDED + " Ex: " + ex.Message);
-            }
-        }
-
-        public IDataResult<Post> ReplaceOne(Post post)
-        {
-            try
-            {
-                _postRepository.ReplaceOne(post);
-                return new SuccessDataResult<Post>(GeneralMessages.RECORD_UPDATED);
-            }
-            catch (Exception ex)
-            {
-                return new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_UPDATED + " Ex: " + ex.Message);
+                return new ErrorDataResult<Post>(_postMessages.NOT_ADDED() + " - Ex = " + ex.Message);
             }
         }
 
@@ -144,24 +88,11 @@ namespace PostServices.Service.Concrete
             try
             {
                 await _postRepository.ReplaceOneAsync(post);
-                return new SuccessDataResult<Post>(GeneralMessages.RECORD_UPDATED);
+                return new SuccessDataResult<Post>(_postMessages.UPDATED());
             }
             catch (Exception ex)
             {
-                return new ErrorDataResult<Post>(GeneralMessages.RECORD_NOT_UPDATED + " Ex: " + ex.Message);
-            }
-        }
-
-        public IResult DeleteOne(Post post)
-        {
-            try
-            {
-                _postRepository.DeleteOne(a => a.Id == post.Id);
-                return new SuccessResult(GeneralMessages.RECORD_DELETED);
-            }
-            catch (Exception ex)
-            {
-                return new ErrorResult(GeneralMessages.RECORD_NOT_DELETED + " Ex: " + ex.Message);
+                return new ErrorDataResult<Post>(_postMessages.NOT_UPDATED() + " - Ex = " + ex.Message);
             }
         }
 
@@ -170,23 +101,11 @@ namespace PostServices.Service.Concrete
             try
             {
                 await _postRepository.DeleteOneAsync(a => a.Id == post.Id);
-                return new SuccessResult(GeneralMessages.RECORD_DELETED);
+                return new SuccessResult(_postMessages.DELETED());
             }
             catch (Exception ex)
             {
-                return new ErrorResult(GeneralMessages.RECORD_NOT_DELETED + " Ex: " + ex.Message);
-            }
-        }
-        public IResult DeleteById(string id)
-        {
-            try
-            {
-                _postRepository.DeleteById(id);
-                return new SuccessResult(GeneralMessages.RECORD_DELETED);
-            }
-            catch (Exception ex)
-            {
-                return new ErrorResult(GeneralMessages.RECORD_NOT_DELETED + " Ex: " + ex.Message);
+                return new ErrorResult(_postMessages.NOT_DELETED() + " - Ex = " + ex.Message);
             }
         }
 
@@ -195,11 +114,11 @@ namespace PostServices.Service.Concrete
             try
             {
                 await _postRepository.DeleteByIdAsync(id);
-                return new SuccessResult(GeneralMessages.RECORD_DELETED);
+                return new SuccessResult(_postMessages.DELETED());
             }
             catch (Exception ex)
             {
-                return new ErrorResult(GeneralMessages.RECORD_NOT_DELETED + " Ex: " + ex.Message);
+                return new ErrorResult(_postMessages.NOT_DELETED() + " - Ex = " + ex.Message);
             }
         }
     }

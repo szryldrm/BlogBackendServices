@@ -15,9 +15,9 @@ namespace PostServices.Model.Concrete
         public string ImageURL { get; set; }
         public Author Author { get; set; }
         public List<Comment> Comments { get; set; }
-        public Like[] Likes { get; set; }
-        public Tag[] Tags { get; set; }
-        public Category[] Categories { get; set; }
+        public List<Like> Likes { get; set; }
+        public List<Tag> Tags { get; set; }
+        public List<Category> Categories { get; set; }
 
     }
 }

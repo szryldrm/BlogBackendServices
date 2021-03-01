@@ -31,6 +31,11 @@ namespace ArticleServices.Controllers
         [HttpGet("{id}")]
         public IActionResult GetArticle(string id)
         {
+            if (id.Length < 24)
+            {
+                return BadRequest("ID MUST BE 24 DIGITS");
+            }
+
             var result = _articleService.GetOneAsync(id);
             if (result.Result.Success)
             {
@@ -43,6 +48,11 @@ namespace ArticleServices.Controllers
         [HttpPost]
         public IActionResult InsertArticle([FromBody] POST_PostAndArticleDTO POST_PostAndArticleDTO)
         {
+            if (POST_PostAndArticleDTO.Id.Length < 24)
+            {
+                return BadRequest("ID MUST BE 24 DIGITS");
+            }
+
             var article = _mapper.Map<Article>(POST_PostAndArticleDTO.Article);
             var result = _articleService.InsertOneAsync(POST_PostAndArticleDTO.Id, article);
             if (result.Result.Success)
@@ -55,6 +65,11 @@ namespace ArticleServices.Controllers
         [HttpPut]
         public IActionResult UpdateArticle([FromBody] PUT_PostAndArticleDTO PUT_PostAndArticleDTO)
         {
+            if (PUT_PostAndArticleDTO.Id.Length < 24)
+            {
+                return BadRequest("ID MUST BE 24 DIGITS");
+            }
+
             var article = _mapper.Map<Article>(PUT_PostAndArticleDTO.Article);
             var result = _articleService.UpdateOneAsync(PUT_PostAndArticleDTO.Id, article);
             if (result.Result.Success)
@@ -67,6 +82,11 @@ namespace ArticleServices.Controllers
         [HttpDelete]
         public IActionResult DeleteArticle([FromBody] DELETE_PostAndArticleDTO DELETE_PostAndArticleDTO)
         {
+            if (DELETE_PostAndArticleDTO.Id.Length < 24)
+            {
+                return BadRequest("ID MUST BE 24 DIGITS");
+            }
+
             var article = _mapper.Map<Article>(DELETE_PostAndArticleDTO.Article);
             var result = _articleService.DeleteOneAsync(DELETE_PostAndArticleDTO.Id, article);
             if (result.Result.Success)
