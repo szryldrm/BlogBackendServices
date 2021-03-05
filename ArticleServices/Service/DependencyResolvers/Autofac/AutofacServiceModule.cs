@@ -1,5 +1,6 @@
 ﻿using ArticleServices.Data.Abstract;
 using ArticleServices.Data.Concrete;
+using ArticleServices.Extensions.Messages;
 using ArticleServices.Service.Abstract;
 using ArticleServices.Service.Concrete;
 using Autofac;
@@ -19,6 +20,7 @@ namespace ArticleServices.Service.DependencyResolvers.Autofac
         {
             builder.RegisterType<ArticleService>().As<IArticleService>();
             builder.RegisterType<ArticleRepository>().As<IArticleRepository>();
+            builder.RegisterType<ArticleMessages>().As<IArticleMessages>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

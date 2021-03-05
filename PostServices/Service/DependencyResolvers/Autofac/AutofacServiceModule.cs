@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PostServices.Extensions.Messages;
 
 namespace PostServices.Service.DependencyResolvers.Autofac
 {
@@ -19,6 +20,7 @@ namespace PostServices.Service.DependencyResolvers.Autofac
         {
             builder.RegisterType<PostService>().As<IPostService>();
             builder.RegisterType<PostRepository>().As<IPostRepository>();
+            builder.RegisterType<PostMessages>().As<IPostMessages>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

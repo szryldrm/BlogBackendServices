@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CategoryServices.Extensions.Messages
 {
-    public class CategoryMessages
+    public class CategoryMessages : ICategoryMessages
     {
         private LangCode _langCode;
         private string _name;

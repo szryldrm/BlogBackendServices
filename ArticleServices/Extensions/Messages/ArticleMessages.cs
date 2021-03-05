@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ArticleServices.Extensions.Messages
 {
-    public class ArticleMessages
+    public class ArticleMessages : IArticleMessages
     {
         private LangCode _langCode;
         private string _name;

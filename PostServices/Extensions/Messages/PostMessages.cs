@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PostServices.Extensions.Messages
 {
-    public class PostMessages
+    public class PostMessages : IPostMessages
     {
         private LangCode _langCode;
         private string _name;

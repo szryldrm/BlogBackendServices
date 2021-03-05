@@ -19,7 +19,7 @@ namespace CategoryServices.Service.Concrete
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
-        private readonly CategoryMessages _categoryMessages;
+        private readonly ICategoryMessages _categoryMessages;
 
         public CategoryService(ICategoryRepository categoryRepository)
         {

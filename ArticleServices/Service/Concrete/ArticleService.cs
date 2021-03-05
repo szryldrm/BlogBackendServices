@@ -19,7 +19,7 @@ namespace ArticleServices.Service.Concrete
     public class ArticleService : IArticleService
     {
         private readonly IArticleRepository _articleRepository;
-        private readonly ArticleMessages _articleMessages;
+        private readonly IArticleMessages _articleMessages;
 
         public ArticleService(IArticleRepository articleRepository)
         {
