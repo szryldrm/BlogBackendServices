@@ -6,7 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using SYCore.DependencyResolvers;
+using SYCore.Extensions;
+using SYCore.Settings.MongoSettings;
+using SYCore.Utilities.IoC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,11 +31,21 @@ namespace LogServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MongoSettings>(Configuration.GetSection("MongoSettings"));
+            services.AddSingleton<IMongoSettings>(serviceProvider =>
+                serviceProvider.GetRequiredService<IOptions<MongoSettings>>().Value);
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LogServices", Version = "v1" });
+            });
+
+            services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule(Configuration),
             });
         }
 

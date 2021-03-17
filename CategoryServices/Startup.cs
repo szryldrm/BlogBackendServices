@@ -35,7 +35,7 @@ namespace CategoryServices
             services.AddSingleton<IMongoSettings>(serviceProvider =>
                 serviceProvider.GetRequiredService<IOptions<MongoSettings>>().Value);
 
-            object p = services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
